@@ -24,10 +24,10 @@ class LikesController < ApplicationController
     else
       @like = @likeable.likes.new(likecount: 0,user_id: current_user.id)
       if @like.save
-        flash[:notice] = "Post liked"
-        redirect_to posts_path
+        # flash[:notice] = "Post liked"
+        # redirect_to posts_path
       else
-        render 'new'
+        # render 'new'
       end 
     end
   end
@@ -37,7 +37,7 @@ class LikesController < ApplicationController
     if already_liked?
       @like.destroy
     end
-    redirect_to posts_path
+    # redirect_to posts_path
   end
 
   private

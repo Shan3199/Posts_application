@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-center">
+	<ul>
+		<% @posts.each do |post| %>
+		  <br>
+			<div class="card text-black bg-warning mb-1" style="max-width: rem;">
+			<div class="card-header">Header</div>
+			<div class="card-body">
+			  <h5  style="color:Tomato;, class="card-title"><%= post.title %></h5>
+		    <p class="card-text"><%= post.body %></p>		
+		    	<% if user_signed_in? %>
+		    		<% if post.author?(current_user)%>
+			    		<%= link_to 'Edit', edit_user_post_path(post.user, post), class:"btn btn-outline-success"%>
+			    		<%= link_to 'Delete', user_post_path(post.user, post),  method: :delete,
+            								data: { confirm: "Are you sure?" },
+            								class:"btn btn-outline-danger"%>
+            	<%= link_to 'Post Info ', post_comments_path(post), class:"btn btn-outline-success"%>
+          	<%end%>
+          <%end%>
+
+        	<%= render partial: 'post_likes', locals: {post: post} %>
+
+
+		  	</div>
+			</div>		
+		<% end %>
+		<br>
+	</ul>
+</div>
+
+<script type="text/javascript">
+	$(".card-body").click(function(){
+		alert();
+	})
+</script>
+
