@@ -1,0 +1,22 @@
+
+<br><br><br>
+<div class="card my-1">
+  <div class="card-body">
+    <p class="font-weight-bold">Comments</p>
+   
+    <%= form_with(model: [@post, @comment]) do |f| %>
+      <div class="form-group">
+        <%= f.label 'New comment' %>
+        <%= f.text_area :text, class: 'form-control' %>
+        <% @comment.errors.full_messages_for(:text).each do |message| %>
+          <div class="alert alert-danger" role="alert">
+            <%= message %>
+          </div>
+        <%end%>
+      
+      <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+
+

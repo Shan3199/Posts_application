@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+
+	<ul>
+		<% @posts.each do |post| %>
+		<br>
+			<div class="card text-black bg-warning mb-1" style="max-width: rem;">
+				<div class="card-header">Header</div>
+					<div class="card-body">
+						  <h5  style="color:Tomato;, class="card-title"><%= post.title %></h5>
+						    <p class="card-text"><%= post.body %></p>		
+						    	<% if user_signed_in? %>
+						    		<% if post.author?(current_user)%>
+						    		<%= link_to 'Edit', edit_user_post_path(post.user, post), class:"btn btn-outline-success"%>
+						    		<%= link_to 'Delete', user_post_path(post.user, post),  method: :delete,
+                  								data: { confirm: "Are you sure?" },
+                  								class:"btn btn-outline-danger"%>
+                  	 <%= link_to 'Post Info ', post_comments_path(post), class:"btn btn-outline-success"%>
+
+                  		<%end%>
+                  	<%end%>
+
+                  	<% if !post.author?(current_user)%>
+                 	 		<%= link_to 'Comment!', post_comments_path(post), class:"btn btn-outline-success"%>
+                 	 		<%= link_to 'View comments!',post_path(post), class:"btn btn-outline-info"%>
+                 	 	
+                 	 			
+                 	 			
+                 	 			
+
+	                 	 		<% if post.post_user_like(current_user.id)%>
+	                 	 			<% pre_like = post.post_user_like(current_user.id) %>
+	                 	 			<%= link_to  (post.likes.count)==0 ? 'NoLike!' : "Liked #{post.likes.count}",post_like_path(post.id, pre_like.id),method: :delete, class:"btn btn-block btn-primary fa fa-thumbs-up"%>
+	                 	 		<%else%>
+	                 	 			<%= link_to  (post.likes.count)==0 ? 'NoLike!' : "Likes #{post.likes.count}",post_likes_path(post.id),method: :post, class:"btn btn-block btn-primary fa fa-thumbs-up"%>
+                 	 			
+
+											<%end%>
+                 	 		
+						    		<%end%>
+
+						  	</div>
+						  		
+					</div>
+			
+					
+		<% end %>
+		<br>
+	</ul>
+</div>
+
+
+

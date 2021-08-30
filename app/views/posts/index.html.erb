@@ -1,0 +1,21 @@
+<br><br>
+
+<div class="d-flex justify-content-center">
+	<br>
+		<%= link_to 'Back to Mine Blogs!', root_path, class:"btn btn-outline-success"%>
+	<br>
+
+</div>	
+<br>					
+<div class ="d-flex justify-content-center">
+		<%= will_paginate %>
+</div>	
+
+	<%# if @post.author?(current_user)%>
+	<%=render partial: "welcome/postshow"%>
+	<%#end%>
+<div class="d-flex justify-content-center">
+	<br>
+	 <%= will_paginate %>
+	 <br>
+</div>
