@@ -17,8 +17,17 @@
           	<%end%>
           <%end%>
 
-        	<%= render partial: 'post_likes', locals: {post: post} %>
+          <% if !post.author?(current_user)%>
+            <%= link_to 'Comment!', post_comments_path(post), class:"btn btn-outline-success"%>
+            <%= link_to 'View comments!',post_path(post), class:"btn btn-outline-info"%>
+            
+          	<!-- <div id="items_grid"> -->
+              <%= render partial: 'post_likes', locals: {post: post} %>              
+            <!-- </div> -->
+            
 
+            
+          <%end%>
 
 		  	</div>
 			</div>		
@@ -27,9 +36,9 @@
 	</ul>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(".card-body").click(function(){
 		alert();
 	})
 </script>
-
+ -->

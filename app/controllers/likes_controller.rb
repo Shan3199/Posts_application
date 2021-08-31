@@ -22,10 +22,17 @@ class LikesController < ApplicationController
     if already_liked?
       flash[:alert] = "You already have liked"
     else
+      # debugger
+      @post = Post.find(params[:post_id])
       @like = @likeable.likes.new(likecount: 0,user_id: current_user.id)
+      
       if @like.save
         # flash[:notice] = "Post liked"
         # redirect_to posts_path
+        respond_to do |format|
+          #debugger
+          format.js 
+        end
       else
         # render 'new'
       end 
@@ -36,6 +43,9 @@ class LikesController < ApplicationController
     # debugger
     if already_liked?
       @like.destroy
+      respond_to do |format|
+        format.js
+      end
     end
     # redirect_to posts_path
   end
