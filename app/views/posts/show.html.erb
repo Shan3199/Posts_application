@@ -1,33 +1,116 @@
- <br><br>
-<div class="d-flex justify-content-center">
- 
-    <%= link_to 'Back!!', posts_path, class:"btn btn-outline-success"%>
-  <br>
-</div>
-
 <br><br>
-<div class="d-flex justify-content-center">
-  <% @comment.each do |comment| %>        
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title"><%= comment.user.email %></h5>
-        <p class="card-text"><%= comment.text %>.</p>
-        <% if comment.author?(current_user)%>
-          <%= link_to 'Edit!',  edit_post_comment_path(comment.post, comment),class:"btn btn-outline-info"%>
-          <%= link_to 'Delete',  post_comment_path(comment.post, comment),  method: :delete,data: { confirm: "Are you sure?" },class:"btn btn-outline-danger"%>
-          <%= link_to 'View likes', comment_likes_path(comment), class:"btn btn-outline-info"%>
-         
+<div class="card text-center">
+ <% if @post.author?(current_user)%>
+ <div class="container">
+  <div class="card">
+    <div class="col-md-4 ">
+    </div><div class="d-flex justify-content-end">
+
+      <div class="card" style="width: 18rem;, height: 10rem;">
+        <div class="card-header">
+         Likes by users!!
+       </div>
+       <ul class="list-group list-group-flush overflow-scroll adjust_height">
+        <% @likes.each do |like| %>
+        <li class="list-group-item"><%=  like.user.email %></li>
         <%end%>
-        
-         <% if !comment.author?(current_user)%>
-        <% if comment.comment_user_like(current_user.id)%>
-            <% pre_like = comment.comment_user_like(current_user.id) %>
-              <%= link_to  (comment.likes.count)==0 ? 'NoLike!' : "Liked #{comment.likes.count}",comment_like_path(comment.id, pre_like.id),method: :delete, class:"btn btn-block btn-primary fa fa-thumbs-up"%>  
-            <%else%>
-              <%= link_to  (comment.likes.count)==0 ? 'NoLike!' : "Likes #{comment.likes.count}",comment_likes_path(comment.id),method: :post, class:"btn btn-block btn-primary fa fa-thumbs-up"%>
-            <%end%>
-        <%end%>
-      </div>
+      </ul>   
     </div>
-  <%end%>
-</div>
+
+    <%end%>
+
+    <div class="card text-center" style="width: 80rem;, height: 1000rem;">
+      <div class="card-header">
+        <%= @post.user.email%>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%=@post.title%></h5>
+        <%if @post.image.attached?%>
+        <p>
+          <%=image_tag @post.image%>
+        </p>
+        <%end%>
+        <p class="card-text"><%= @post.body.body%></p>
+        <a><%= link_to 'Back!!', posts_path, class:"btn btn-primary"%></a>
+        <a><%= link_to 'Comment!',   new_post_comment_path(@post),class:"btn btn-primary"%></a>
+
+      </div>
+    </div>  
+
+  </div>
+  <br><br>
+
+
+
+
+
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+        <div class="card-body p-4">
+          <% @comment.each do |comment| %>
+
+          <div class="card mb-4">
+            <div class="card-body">
+
+              <p><%=comment.text%> </p>
+              <% comment.replies.each do |reply| %>
+              <%# if reply.parent_id == comment.id %>
+              <%# byebug %>
+              <p>
+                <a><%=reply.text%></a> -by
+                <a><%=reply.user.email%></a>
+                
+                <%= link_to 'reply', post_comment_new_reply_path(@post ,comment_id: comment.id) %>
+
+              </p>
+              <% #end %>
+              <!-- <ul>
+                    <%# comment.replies.each do |child_reply| %>
+                    <%# if child_reply.parent_id == reply.id %>
+                      <p>
+                        <a><%#=child_reply.text%></a> -by
+                        <a><%#=child_reply.user.email%></a>
+           
+                        <%#= link_to 'reply', post_comment_new_reply_path(@post ,comment_id: comment.id) %>
+
+                      </p>
+                      <%#end%>
+                    <%#end%>
+                  </ul> -->
+                  <%end%>
+                  <div class="d-flex justify-content-end">
+                    <%= link_to 'reply', post_comment_new_reply_path(@post ,comment_id: comment.id) %>
+                    <%= link_to 'Edit!',  edit_post_comment_path(comment.post, comment)%>
+                    <%= link_to 'Delete',  comment_path(comment.id),  method: :delete,data: { confirm: "Are you sure?" }%>
+
+                  </div>
+
+
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                      <img
+                      src="https://mdbootstrap.com/img/Photos/Avatars/img%20(4).jpg"
+                      alt="avatar"
+                      width="25"
+                      height="25"
+                      />
+                      <p class="small mb-0 ms-2"><%=comment.user.email%></p>
+
+                      <br>
+                    </div>
+                    <div class="d-flex flex-row align-items-center">
+                      <p class="small text-muted mb-0">Upvote?</p>
+                      <i
+                      class="far fa-thumbs-up mx-2 fa-xs text-black"
+                      style="margin-top: -0.16rem;"
+                      ></i>
+                      <p class="small text-muted mb-0">3</p>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+              <%end%>
+            </div>

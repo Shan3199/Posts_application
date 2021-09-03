@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
       @comment.post = @post
       if @comment.save
         #flash.now[:notice] = "created"
-        redirect_to posts_path
+        redirect_to root_path
       else
         #flash.now[:error] = @comment.errors.full_messages
         render 'new'
@@ -46,9 +46,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to posts_path
+    redirect_to root_path
   end
 
   def new_reply

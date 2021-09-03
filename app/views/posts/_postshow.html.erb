@@ -1,44 +1,44 @@
+<div class="container mb-5 mt-5">
+
 <div class="d-flex justify-content-center">
 	<ul>
 		<% @posts.each do |post| %>
-		  <br>
-			<div class="card text-black bg-warning mb-1" style="max-width: rem;">
+		<br>
+		<div class="card text-black bg-warning mb-1" style="max-width: rem;">
 			<div class="card-header">Header</div>
 			<div class="card-body">
-			  <h5  style="color:Tomato;, class="card-title"><%= post.title %></h5>
-		    <p class="card-text"><%= post.body %></p>		
-		    	<% if user_signed_in? %>
-		    		<% if post.author?(current_user)%>
-			    		<%= link_to 'Edit', edit_user_post_path(post.user, post), class:"btn btn-outline-success"%>
-			    		<%= link_to 'Delete', user_post_path(post.user, post),  method: :delete,
-            								data: { confirm: "Are you sure?" },
-            								class:"btn btn-outline-danger"%>
-            	<%= link_to 'Post Info ', post_comments_path(post), class:"btn btn-outline-success"%>
-          	<%end%>
-          <%end%>
+				<h5  style="color:Tomato;, class="card-title"><%= post.title %></h5>
+				
+				<div class=' card-text textControl'><p><%= truncate(strip_tags(post.body.body.to_s), length: 50) %></div>
+					
+					<%= link_to '...Read more', post_path(post), class: "read-more-#{post.id} textControl" %></p>
 
-          <% if !post.author?(current_user)%>
-            <%= link_to 'Comment!', post_comments_path(post), class:"btn btn-outline-success"%>
-            <%= link_to 'View comments!',post_path(post), class:"btn btn-outline-info"%>
-            
-          	<!-- <div id="items_grid"> -->
-              <%= render partial: 'post_likes', locals: {post: post} %>              
-            <!-- </div> -->
-            
 
-            
-          <%end%>
+					<% if user_signed_in? %>
+					<% if post.author?(current_user)%>
+					<%= link_to 'Edit', edit_user_post_path(post.user, post), class:"btn btn-outline-success"%>
+					<%= link_to 'Delete', user_post_path(post.user, post),  method: :delete,
+					data: { confirm: "Are you sure?" },
+					class:"btn btn-outline-danger"%>
+					<%= link_to 'Post Info ', post_path(post), class:"btn btn-outline-success"%>
+					<%end%>
+					<%end%>
 
-		  	</div>
-			</div>		
-		<% end %>
-		<br>
-	</ul>
+					<% if !post.author?(current_user)%>
+					<%#= link_to 'Comment!', post_comments_path(post), class:"btn btn-outline-success"%>
+					<%= link_to 'Postinfo!',post_path(post), class:"btn btn-outline-info"%>
+
+					<!-- <div id="items_grid"> -->
+						<%= render partial: 'post_likes', locals: {post: post} %>              
+						<!-- </div> -->
+
+
+
+						<%end%>
+					</div>
+				</div>		
+				<% end %>
+				<br>
+			</ul>
+		</div>
 </div>
-
-<!-- <script type="text/javascript">
-	$(".card-body").click(function(){
-		alert();
-	})
-</script>
- -->

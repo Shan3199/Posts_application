@@ -9,17 +9,20 @@
         </div>
       <% end %>
     </p>
-           
+         
     <p>
       <%= form.label :body %><br>
-      <%= form.text_area :body %>
+      
+      <%= form.rich_text_area  :body %>
       <% @post.errors.full_messages_for(:body).each do |message| %>
         <div class="alert alert-danger" role="alert">
           <%= message %>
         </div>
       <% end %>
-    </p>
-                
+    </p>  
+        <br><br>
+        <%= form.file_field :image %>      
+        <br><br>
 
       <p>
         <%= form.submit  class:"btn btn-outline-success" %>

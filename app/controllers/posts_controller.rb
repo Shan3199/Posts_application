@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
 	before_action :set_user
-	before_action :find_post, only: [:show, :edit, :update, :destroy]
+	before_action :find_post, only: [:show, :edit, :update]
 
  	
 	
@@ -11,7 +11,11 @@ class PostsController < ApplicationController
 	end
 
 	def show
-		@comment = @post.comments.all
+		@likes = @post.likes.all
+		@comment = @post.comments.parent_comment
+		  # @post = Post.find(params[:post_id])
+    # @comments = @post.comments.all
+    
 	end
 	
 
@@ -42,6 +46,7 @@ class PostsController < ApplicationController
   	end
 
   def destroy
+  	debugger
     @post.destroy
   	redirect_to root_path
   end
@@ -51,11 +56,12 @@ class PostsController < ApplicationController
 	private
 
 	def find_post
+		# debugger
 		@post = Post.find(params[:id])
 	end
 
 	def post_params
-		params.require(:post).permit(:title, :body)
+		params.require(:post).permit(:title, :body, :image)
 	end
 
 	def set_user

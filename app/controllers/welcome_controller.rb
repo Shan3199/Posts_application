@@ -8,8 +8,9 @@ class WelcomeController < ApplicationController
     else
       @posts = Post.all
     end
-    
   end
+    
+
 
 
 
