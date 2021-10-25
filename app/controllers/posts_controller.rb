@@ -27,7 +27,8 @@ class PostsController < ApplicationController
 		# debugger
 		@post = @user.posts.new(post_params)
 		 if @post.save
-      		redirect_to root_path
+		 	PostMailer.with(post: @post).new_post_email.deliver_now
+      redirect_to root_path
     	else
       		render :new
     	end

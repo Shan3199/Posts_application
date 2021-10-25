@@ -74,4 +74,20 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+  config.action_mailer.default_url_options = { :host => 'localhost:3000', protocol: 'http' }
+
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+     address:              'smtp.gmail.com',
+     port:                 587,
+     user_name:            'shantanunarware95@gmail.com',
+     password:             'Prashant#98',
+     authentication:       'plain',
+     enable_starttls_auto: true  
+  }
+
+  ENV['TWILIO_ACCOUNT_SID'] = 'AC83d32d126ebf4da32574aaa3b7ec2d28'
+  ENV['TWILIO_AUTH_TOKEN'] = 'd4f07505ee03b1d54592340a95252a80'
+  ENV['TWILIO_FROM_PHONE_NUMBER'] = '+13253082135'
 end

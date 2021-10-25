@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'messages/reply'
   get 'comments/index'
   root to: 'welcome#index'
   devise_for :users
@@ -25,5 +26,11 @@ Rails.application.routes.draw do
   end
 
   resources :comments, only: [:destroy]
+ 
 
+ resource :messages do
+  collection do
+    post 'reply'
+  end
+end
 end
