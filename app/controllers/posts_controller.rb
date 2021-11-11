@@ -71,7 +71,7 @@ class PostsController < ApplicationController
 
   def destroy
   	debugger
-    @post.destroy
+    @post.destroy	
   	redirect_to root_path
   end
 

@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  acts_as_paranoid
   validates :title, :presence => true, :length => { :maximum => 50 }
   validates :body, :presence => true, :length => { :maximum => 50000 }
 

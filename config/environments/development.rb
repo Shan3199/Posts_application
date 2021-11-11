@@ -87,7 +87,7 @@ Rails.application.configure do
      enable_starttls_auto: true  
   }
 
-  ENV['TWILIO_ACCOUNT_SID'] = 'AC83d32d126ebf4da32574aaa3b7ec2d28'
-  ENV['TWILIO_AUTH_TOKEN'] = 'd4f07505ee03b1d54592340a95252a80'
+  # ENV['TWILIO_ACCOUNT_SID'] = 'AC83d32d126ebf4da32574aaa3b7ec2d28'
+  # ENV['TWILIO_AUTH_TOKEN'] = 'd4f07505ee03b1d54592340a95252a80'
   ENV['TWILIO_FROM_PHONE_NUMBER'] = '+13253082135'
 end
