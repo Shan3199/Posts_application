@@ -65,3 +65,7 @@ gem 'twilio-ruby'
 gem 'wicked_pdf'
 gem "wkhtmltopdf-binary"
 gem 'acts_as_paranoid'
+
+group :test do
+  gem 'simplecov', require: false
+end
