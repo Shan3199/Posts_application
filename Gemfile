@@ -62,3 +62,6 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'ckeditor'
 gem 'image_processing', '~> 1.2'
 gem 'twilio-ruby'
+gem 'wicked_pdf'
+gem "wkhtmltopdf-binary"
+gem 'acts_as_paranoid'

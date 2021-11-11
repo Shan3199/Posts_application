@@ -14,11 +14,15 @@ Rails.application.routes.draw do
     resources :comments, except: [:destroy]  do 
       get :new_reply 
       post :create_reply
+     
+
     end
   end
 
   resources :posts do
+    get :generate_pdf
     resources :likes
+
   end
 
   resources :comments, except: [:destroy]   do

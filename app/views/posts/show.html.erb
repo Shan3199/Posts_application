@@ -33,7 +33,7 @@
         <p class="card-text"><%= @post.body.body%></p>
         <a><%= link_to 'Back!!', posts_path, class:"btn btn-primary"%></a>
         <a><%= link_to 'Comment!',   new_post_comment_path(@post),class:"btn btn-primary"%></a>
-
+        <a><%= link_to 'Generate_pdf',   post_generate_pdf_path(@post, format: :pdf),class:"btn btn-primary"%></a>
       </div>
     </div>  
 
