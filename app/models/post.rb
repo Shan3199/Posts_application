@@ -11,7 +11,8 @@ class Post < ApplicationRecord
   has_rich_text :body
 
   def author?(author)
-    user.eql?(author)
+    # debugger
+    user.eql?(author) 
   end  
 
   def post_user_like(user_id)
@@ -19,6 +20,10 @@ class Post < ApplicationRecord
     post_like = self.likes.where(user_id: user_id).last
   end
 
+  def user_role(current_user)
+    # debugger
+    current_user.has_role? :admin
+  end
 
   scope :not_current_user, ->(current_user) { where.not(user_id: current_user) }
 end

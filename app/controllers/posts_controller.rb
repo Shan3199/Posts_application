@@ -70,8 +70,8 @@ class PostsController < ApplicationController
   	end
 
   def destroy
-  	debugger
-    @post.destroy	
+  	# debugger
+  	Post.find(params[:id]).destroy	
   	redirect_to root_path
   end
 

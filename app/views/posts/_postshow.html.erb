@@ -15,7 +15,7 @@
 
 
 					<% if user_signed_in? %>
-					<% if post.author?(current_user)%>
+					<% if post.author?(current_user) || post.user_role(current_user)%>
 					<%= link_to 'Edit', edit_user_post_path(post.user, post), class:"btn btn-outline-success"%>
 					<%= link_to 'Delete', user_post_path(post.user, post),  method: :delete,
 					data: { confirm: "Are you sure?" },
