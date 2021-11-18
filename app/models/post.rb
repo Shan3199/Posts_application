@@ -26,4 +26,18 @@ class Post < ApplicationRecord
   end
 
   scope :not_current_user, ->(current_user) { where.not(user_id: current_user) }
+
+  # scope :title_demo, -> {where(title: "demo")}
+
+  # scope :today_post, -> {where(created_at: DateTime.now.all_day)}
+
+  # def self.class_method_1
+  #   debugger
+  #   Post.where(title: "demo")
+  # end
+
+  # def self.class_method_2
+  #   Post.where(created_at: DateTime.now.all_day)
+  # end
+
 end
