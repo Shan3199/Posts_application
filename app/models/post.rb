@@ -14,7 +14,6 @@ class Post < ApplicationRecord
   end  
 
   def post_user_like(user_id)
-    # debugger
     post_like = self.likes.where(user_id: user_id).last
   end
 

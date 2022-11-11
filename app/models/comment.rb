@@ -16,7 +16,6 @@ class Comment < ApplicationRecord
   end   
 
    def comment_user_like(user_id)
-    # debugger
     comment_like = self.likes.where(user_id: user_id).last
   end
 
