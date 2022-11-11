@@ -65,7 +65,7 @@ class PostsController < ApplicationController
 	end
 
 	def set_user
-    	@user = current_user
+    @user = current_user
   end
 
  
