@@ -46,7 +46,6 @@ class PostsController < ApplicationController
   	end
 
   def destroy
-  	debugger
     @post.destroy
   	redirect_to root_path
   end

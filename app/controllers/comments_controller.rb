@@ -31,7 +31,6 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    debugger
     @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
   end
@@ -46,7 +45,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-
     @comment = Comment.find(params[:id])
     @comment.destroy
     redirect_to root_path
@@ -76,13 +74,10 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    # debugger
     params.require(:comment).permit(:post_id,:text)
   end
 
   def reply_params
-    # debugger
-    params.require(:comment).permit(:user_id, :text, :post_id)
-    
+    params.require(:comment).permit(:user_id, :text, :post_id) 
   end
 end 
