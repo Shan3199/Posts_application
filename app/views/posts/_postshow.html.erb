@@ -5,9 +5,12 @@
 		<% @posts.each do |post| %>
 		<br>
 		<div class="card text-black bg-warning mb-1" style="max-width: rem;">
-			<div class="card-header">Header</div>
+			<div class="card-header"><%= image_tag(post.user.avatar,:size => "60x60") if post.user.avatar.present?%>
+        <%= post.user.first_name%>
+        <%= post.user.last_name%>
+      </div>
 			<div class="card-body">
-				<h5  style="color:Tomato;, class="card-title"><%= post.title %></h5>
+				<h5  style="color:Tomato; class='card-title'"><%= post.title %></h5>
 				
 				<div class=' card-text textControl'><p><%= truncate(strip_tags(post.body.body.to_s), length: 50) %></div>
 					

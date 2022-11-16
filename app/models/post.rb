@@ -21,7 +21,7 @@ class Post < ApplicationRecord
   end
 
   def create_notification
-    notification = Notification.find_or_initialize_by(headings: "Post Notification", contents: "New post available" )
+    notification = Notification.find_or_initialize_by(headings: "Post Notification", contents: "#{self.user.first_name} has created a new post.")
     notification.save
   end
 end

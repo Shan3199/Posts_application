@@ -1,21 +1,33 @@
-<h4> <center>Accounts </h4><br>
+<style>
+  .tab_color{
+    background-color: skyblue ;
+    font-size: x-large;
+    font-family: Arial;
+  }
+
+  .table_change{
+    font-size: large;
+    font-family: Arial;
+  }
 
 
+</style>
 
+
+<h2> <center>Accounts </h2><br>
 <div class="container">
   <table class="table table-striped">
-    <tr >
+    <tr class= "tab_color">
       <th>First Name</th>
       <th>Last Name</th>
       <th>Gender</th>
     </tr>
 
     <% @users.each do |user| %>
-      <tr>
+      <tr class="table_change">
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
         <td><%= user.gender %></td>
-        <td><%#= user.email %></td>
       </tr>
     <% end %>
   </table>
