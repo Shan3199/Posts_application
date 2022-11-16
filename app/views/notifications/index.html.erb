@@ -1,4 +1,20 @@
-<h4> Notifications </h4>
-<% @notifications.each do |notification| %>
-	<%= notification.contents%>
-<% end %>
+
+<h2> <center>Notifications </h2><br>
+<div class="container">
+  <table class="table ">
+    <tr >
+     
+    </tr>
+
+    <% @notifications.each do |notification| %>
+    	<tr>
+				<td><%= notification.contents%></td>
+			</tr>
+		<% end %>
+  </table>
+
+</div>
+
+
+
+
