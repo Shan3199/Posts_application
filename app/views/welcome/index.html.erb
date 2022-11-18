@@ -3,23 +3,19 @@
 <div class="d-flex justify-content-center">
 	<h1>Welcome to Posts</h1>
 </div>
-
 		
 	<% if user_signed_in? %>
-		<div class="d-flex justify-content-end">
-			<%= button_to "New Post", new_user_post_path(current_user), :class => "btn btn-primary", :method =>  :get  %>
-		</div>
-		<div class="d-flex justify-content-center">
+		<%#if current_user.status.eql?("active")%>
+			<div class="d-flex justify-content-end">
+				<%= button_to "New Post", new_user_post_path(current_user), :class => "btn btn-primary", :method =>  :get  %>
+			</div>
+			<div class="d-flex justify-content-center">
+		<%#else%>		
 			<%=render partial: "posts/postshow"%>
-		</div>
+			</div>
+		<%#end%>
 
 	<%end%> 
 	
 
 
-<!-- <div class="d-flex justify-content-center">
-	<%# if !user_signed_in? %>
-		<%#=render partial: "welcome/postshow"%>
-	<%#end%>
-
-</div> -->

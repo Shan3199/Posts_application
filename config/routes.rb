@@ -3,10 +3,15 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
   devise_for :users
 
-  resources :users
-
+  resources :users 
+  get "/subscribe",to: "posts#subscribe"
+  get "/sub", to: "posts#sub"
+  get "/pay", to: "posts#pay"
+  get "/payment",to: "posts#payment"
+  post "/success",to: "posts#success"
   resources :users do
     resources :posts
+
   end
 
   resources :posts do
@@ -15,9 +20,11 @@ Rails.application.routes.draw do
       post :create_reply
     end
   end
-
+  
   resources :posts do
-    resources :likes
+
+    resources :likes 
+
   end
 
   resources :comments, except: [:destroy]   do
