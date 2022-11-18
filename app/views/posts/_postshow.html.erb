@@ -19,17 +19,27 @@
 
 					<% if user_signed_in? %>
 					<% if post.author?(current_user)%>
+                
+
 					<%= link_to 'Edit', edit_user_post_path(post.user, post), class:"btn btn-outline-success"%>
 					<%= link_to 'Delete', user_post_path(post.user, post),  method: :delete,
 					data: { confirm: "Are you sure?" },
 					class:"btn btn-outline-danger"%>
+                       
+					<%= link_to 'Pay ', pay_path(user_id:post.user), class:"btn btn-outline-success"%>
+					
 					<%= link_to 'Post Info ', post_path(post), class:"btn btn-outline-success"%>
+
 					<%end%>
 					<%end%>
 
 					<% if !post.author?(current_user)%>
 					<%#= link_to 'Comment!', post_comments_path(post), class:"btn btn-outline-success"%>
 					<%= link_to 'Postinfo!',post_path(post), class:"btn btn-outline-info"%>
+
+   	                <%#= link_to 'Subscribe', subscribe_path(plan_id: "plan_KgIIdBWQkFU56A"),method: :post, class:"btn btn-outline-success"%>
+                    
+
 
 					<!-- <div id="items_grid"> -->
 						<%= render partial: 'post_likes', locals: {post: post} %>              
@@ -45,3 +55,5 @@
 			</ul>
 		</div>
 </div>
+
+

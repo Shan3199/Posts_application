@@ -2,6 +2,9 @@
 <% if post.post_user_like(current_user.id)%>
  	<% pre_like = post.post_user_like(current_user.id) %>
  	<%= link_to  (post.likes.count)==0 ? 'NoLike!' : "Liked #{post.likes.count}",post_like_path(post.id, pre_like.id), remote: true, method: :delete, class:"btn btn-block btn-primary fa fa-thumbs-up", id: "like-link-#{post.id}"%>
+
+
+
 <%else%>
 
  	<%= link_to  (post.likes.count)==0 ? 'NoLike!' : "Likes #{post.likes.count}",post_likes_path(post.id), remote: true, method: :post, class:"btn btn-block btn-primary fa fa-thumbs-up",  id: "like-link-#{post.id}"%>
