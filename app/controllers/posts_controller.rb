@@ -53,45 +53,6 @@ class PostsController < ApplicationController
   	 redirect_to root_path, status: :see_other
   end
 
- # def subscribe
-
-
- # debugger
- # 	#plan_id = params[:plan_id]
-
- # 	# #order = Razorpay::Order.create amount: 10000, currency: 'INR', receipt: 'TEST'
- #  # # require "razorpay"
-	# 	# para_attr = {
-	# 	#   "plan_id": "plan_KgD71jK1BvDM0t",
-	# 	#   "total_count": 1,
-	# 	#   "quantity": 1,
-	# 	#   "customer_notify": 1,
-	# 	#   # "addons": [
-	# 	#   #   {
-	# 	#   #     "item": {
-	# 	#   #       "name": "test",
-	# 	#   #       "amount": 500,
-	# 	#   #       "currency": "INR"
-	# 	#   #     }
-	# 	#   #   }
-	# 	#   # ],
-	# 	#   "notes": {
-	# 	#     "notes_key_1": "subscribe succcesdully",
-	# 	#   },
-	# 	#   "notify_info": {
-	# 	#     "notify_phone": 9229999198,
-	# 	#     "notify_email": "gaurav.kumar@example.com"
-	# 	#   }
-	# 	# }
-
-	# 	# order = Razorpay::Subscription.create(para_attr)
-	# 	#  render json: {data: order}
- # end
-
-
-	# debugger
-	#subscription_plan = Subscription.last
-	 #plan_id = params[:plan_id]
 
 def sub
 	para_attr = {
