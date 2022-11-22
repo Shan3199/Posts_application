@@ -4,14 +4,13 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users 
-  get "/subscribe",to: "posts#subscribe"
+  
   get "/sub", to: "posts#sub"
-  get "/pay", to: "posts#pay"
   get "/payment",to: "posts#payment"
   post "/success",to: "posts#success"
+  
   resources :users do
     resources :posts
-
   end
 
   resources :posts do
@@ -22,9 +21,7 @@ Rails.application.routes.draw do
   end
   
   resources :posts do
-
     resources :likes 
-
   end
 
   resources :comments, except: [:destroy]   do
