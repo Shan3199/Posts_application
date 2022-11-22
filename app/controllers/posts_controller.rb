@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
 	
 	def index
-			# @posts = Post.not_current_user(current_user)
+			#@posts = Post.not_current_user(current_user)
 			#@posts = Post.not_current_user(current_user).paginate(page: params[:page], per_page: 5)
 			@posts = Post.where.not(user_id:current_user).paginate(page: params[:page], per_page: 5)
 	end
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
 	def show
 		@likes = @post.likes.all
 		@comment = @post.comments.parent_comment
-		  # @post = Post.find(params[:post_id])
+		# @post = Post.find(params[:post_id])
     # @comments = @post.comments.all    
 	end
 
@@ -24,7 +24,6 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		# debugger
 		@post = @user.posts.new(post_params)
 		 if @post.save
       		redirect_to root_path
@@ -46,9 +45,8 @@ class PostsController < ApplicationController
 	end
  
 
-  def destroy
-  	
- 		 @post = Post.find(params[:user_id])
+  def destroy  	
+ 		 @post = Post.find_by(id: params[:id], user_id: params[:user_id])
   	 @post.destroy
   	 redirect_to root_path, status: :see_other
   end
@@ -71,13 +69,13 @@ def sub
 end
 
 
- def payment
-  @subscription = Subscription.find_by(subscription_id:params[:subscription_id])
+ # def payment
+ #  @subscription = Subscription.find_by(subscription_id:params[:subscription_id])
 
-	#redirect_to payment.as_json["attributes"]["short_url"]
+	# #redirect_to payment.as_json["attributes"]["short_url"]
 
 
- end
+ # end
 
 def success
  razorpay_payment_id = params[:razorpay_payment_id]
@@ -85,6 +83,9 @@ def success
  razorpay_signature = params[:razorpay_signature]
 
   if Razorpay::Utility.verify_payment_signature(razorpay_payment_id:razorpay_payment_id, razorpay_subscription_id:razorpay_subscription_id,razorpay_signature:razorpay_signature)
+	 
+    current_user.subscriptions.create(subscription_id:razorpay_subscription_id,razorpay_payment_id:razorpay_payment_id)
+
 	 @success = "payment is successful"
 	end
 
@@ -113,30 +114,4 @@ private
    params.require.permit(:total_count,:quantity,:expire_by,:customer_notify)
   end
 
-
 end
-
-
-
-
-
-
-
- para_attr = {
-  "amount": 500,
-  "currency": "INR",
-  "accept_partial": true,
-  "description": "For XYZ purpose",
-  "customer": {
-    "name": "Gaurav Kumar",
-    "email": "gaurav.kumar@example.com",
-    "contact": "+919999999999"
-  },
-  "notify": {
-    "sms": true,
-    "email": true
-  },
-
-  "callback_url": "",
-  "callback_method": "get"
-}
