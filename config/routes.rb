@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "/sub", to: "posts#sub"
   get "/payment",to: "posts#payment"
   post "/success",to: "posts#success"
-  
+  get "/pay",to: "posts#pay"
   resources :users do
     resources :posts
   end

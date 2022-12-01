@@ -61,6 +61,7 @@ class PostsController < ApplicationController
   end
 
   def success
+    debugger
     razorpay_payment_id = params[:razorpay_payment_id]
     razorpay_subscription_id = params[:razorpay_subscription_id]
     razorpay_signature = params[:razorpay_signature]
@@ -69,6 +70,27 @@ class PostsController < ApplicationController
         @success = "payment is successful"
       end
   end
+
+
+  def pay
+    para_attr = {
+    "amount": 500,
+    "currency": "INR",
+    "receipt": "receipt#1",
+    # "notes": {
+    #   "key1": "value3",
+    #   "key2": "value2"
+    #     }
+      }
+      
+     @order = Razorpay::Order.create(para_attr)
+# redirect_to pay_path(order_id:@order.id)
+  end
+
+
+
+
+
 
   private
 
