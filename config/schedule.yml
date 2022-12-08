@@ -1,0 +1,5 @@
+update_payment_status_job:
+  cron: "0 11 * * 1-7"
+  class: "UpdatePaymentStatusJob"
+  queue: update_payment_status_job
+  

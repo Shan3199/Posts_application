@@ -25,4 +25,15 @@ ActiveAdmin.register AdminUser do
     f.actions
   end
 
+  show do
+    attributes_table do
+      row :email
+      row :password
+      row :password_confirmation
+      # row :image do |ad|
+      #   image_tag ad.image.url
+      # end
+    end        
+ end
+
 end

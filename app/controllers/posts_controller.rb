@@ -44,7 +44,8 @@ class PostsController < ApplicationController
     redirect_to root_path, status: :see_other
   end
 
-  def sub
+  def subscription
+   
     para_attr = {
     "plan_id": "#{params[:plan_id]}",
     "total_count": 12,
@@ -55,41 +56,48 @@ class PostsController < ApplicationController
     "notify_email": "gaurav.kumar@example.com"
     }
     }
-    subscription = Razorpay::Subscription.create(para_attr)
-    #Subscription.create(subscription_id:subscription.id)
-    redirect_to payment_path(subscription_id:subscription.id)
+    @subscription = Razorpay::Subscription.create(para_attr)
   end
 
   def success
-    debugger
-    razorpay_payment_id = params[:razorpay_payment_id]
-    razorpay_subscription_id = params[:razorpay_subscription_id]
-    razorpay_signature = params[:razorpay_signature]
-      if Razorpay::Utility.verify_payment_signature(razorpay_payment_id:razorpay_payment_id, razorpay_subscription_id:razorpay_subscription_id,razorpay_signature:razorpay_signature)
-        current_user.subscriptions.create(subscription_id:razorpay_subscription_id,razorpay_payment_id:razorpay_payment_id)
+    # debugger
+    subscription = Subscription.last
+    if params[:razorpay_order_id].present?
+      razorpay_payment_id = params[:razorpay_payment_id]
+      razorpay_order_id  = params[:razorpay_order_id]   
+      razorpay_signature = params[:razorpay_signature]    
+      if Razorpay::Utility.verify_payment_signature(razorpay_payment_id:razorpay_payment_id, razorpay_order_id:razorpay_order_id,razorpay_signature:razorpay_signature)
+       current_user.user_subscriptions.create(razorpay_payment_id:razorpay_payment_id, razorpay_order_id:razorpay_order_id,subscription_id:subscription.id,subscriptions_detail_id:"nil", status:"active")
+        # UpdatePaymentStatusJob.perform_later(
+        #   current_user)
         @success = "payment is successful"
       end
+    else
+      razorpay_payment_id = params[:razorpay_payment_id]
+      razorpay_subscription_id = params[:razorpay_subscription_id]
+      razorpay_signature = params[:razorpay_signature]
+        if Razorpay::Utility.verify_payment_signature(razorpay_payment_id:razorpay_payment_id, razorpay_subscription_id:razorpay_subscription_id,razorpay_signature:razorpay_signature)
+          # current_user.subscriptions.create(subscription_id:razorpay_subscription_id,razorpay_payment_id:razorpay_payment_id)
+          current_user.user_subscriptions.create(subscriptions_detail_id:razorpay_subscription_id,razorpay_payment_id:razorpay_payment_id, subscription_id:subscription.id, status:"active")
+          @success = "payment is successful"
+        end
+    end
   end
 
 
   def pay
     para_attr = {
-    "amount": 500,
+    "amount": 20000,
     "currency": "INR",
     "receipt": "receipt#1",
     # "notes": {
     #   "key1": "value3",
     #   "key2": "value2"
     #     }
-      }
-      
+      }      
      @order = Razorpay::Order.create(para_attr)
-# redirect_to pay_path(order_id:@order.id)
+
   end
-
-
-
-
 
 
   private

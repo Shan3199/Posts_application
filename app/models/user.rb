@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_one_attached :avatar
   has_many :user_subscriptions
-  has_many :subscriptions,through: :user_subscriptions
+  has_many :subscriptions,through: :user_subscriptions,dependent: :destroy
 
 
 end
