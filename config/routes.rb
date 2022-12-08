@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root to: 'welcome#index'
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :users 
   
-  get "/sub", to: "posts#sub"
+  get "/subscription", to: "posts#subscription"
   get "/payment",to: "posts#payment"
   post "/success",to: "posts#success"
   get "/pay",to: "posts#pay"

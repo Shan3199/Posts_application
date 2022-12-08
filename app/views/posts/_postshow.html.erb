@@ -30,15 +30,14 @@
 							<%= link_to 'Post Info ', post_path(post), class:"btn btn-outline-success"%>
 						<%end%>
 					<%end%>
-
-					<% if !post.author?(current_user)%>
-					
+					<% if !post.author?(current_user) %>
+					   
 						<%#= link_to 'Comment!', post_comments_path(post), class:"btn btn-outline-success"%>
-                      
-                        <%= link_to 'Pay ', pay_path, class:"btn btn-outline-success"%>
-						<%= link_to 'Postinfo!',post_path(post), class:"btn btn-outline-info"%>
+                      	<%= link_to 'Postinfo!',post_path(post), class:"btn btn-outline-info"%>
    	                	<%#= link_to 'Subscribe', subscribe_path(plan_id: "plan_KgIIdBWQkFU56A"),method: :post, class:"btn btn-outline-success"%>
-						<%= render partial: 'post_likes', locals: {post: post} %>              
+						<%= render partial: 'post_likes', locals: {post: post} %>   
+					<%#else%>
+					   <%= link_to 'Pay ', pay_path, class:"btn btn-outline-success"%>          
 					<%end%>
 					</div>
 				</div>		

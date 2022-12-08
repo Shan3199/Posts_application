@@ -2,8 +2,6 @@
 
 <div class="d-flex justify-content-center">
 	<br>
-	
-       
 		
 	<br>
 
@@ -13,10 +11,11 @@
 		<%= will_paginate %>
 	</div>	
 
-	<%if current_user.subscriptions.present?%>
+
+	<%if current_user.subscriptions.present? && current_user.user_subscriptions.select{|x| Date.parse(x.created_at.to_s) < Date.today + 10.days }.last.payment_status.eql?("captured")%>
 		<%=render partial: "postshow"%>
-	<%else%>	
-		<%= link_to 'Subscribe', sub_path(plan_id: "plan_Kh7DG1DSLARXSw"), class:"btn btn-outline-success"%>             
+	<%else%>
+		<%= link_to 'Subscribe', subscription_path(plan_id: "plan_Kh7DG1DSLARXSw"), class:"btn btn-outline-success"%>             
 	<%end%>
        	<%# if @post.author?(current_user)%>
 	<div class="d-flex justify-content-center">
