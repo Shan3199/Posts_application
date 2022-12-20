@@ -9,7 +9,7 @@ class UserSubscription < ApplicationRecord
    # debugger
     # AfterPaymentJob.perform_now(self)
     # AfterPaymentJob(self).perform_later(wait: 1.minutes)
-    AfterPaymentJob.set(wait: 2.minutes).perform_later(self)
+    AfterPaymentJob.set(wait: 1.minutes).perform_later(self)
     # AfterPaymentJob.set(wait: Time.now + 5.minutes).perform_later(self)
 
   end

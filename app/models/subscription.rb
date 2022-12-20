@@ -1,6 +1,7 @@
 class Subscription < ApplicationRecord
      has_many :user_subscriptions
      has_many :users ,through: :user_subscriptions
+     belongs_to :plan
      enum :subscription_status => [ :deactive, :active ]
 
      after_save :update_user_data
