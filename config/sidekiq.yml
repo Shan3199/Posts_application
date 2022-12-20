@@ -1,10 +1,10 @@
-development:
-  :concurrency: 5
+# development:
+#   :concurrency: 5
 
-production:
-  :concurrency: 10
+# production:
+#   :concurrency: 10
 
-:max_retries: 1
+# :max_retries: 1
 
-:queues:
-  - default
+# :queues:
+#   - default
