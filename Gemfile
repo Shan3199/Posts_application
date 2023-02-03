@@ -67,3 +67,4 @@ gem 'redis'
 gem 'sidekiq'
 # gem 'whenever'
 gem "sidekiq-cron"
+gem 'jquery-rails'

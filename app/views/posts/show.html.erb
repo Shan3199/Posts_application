@@ -17,7 +17,7 @@
       </div>
     <%end%>
     <div class="d-flex justify-content-center">
-      <div class="card text-center" style="width: 50rem;, height: 50rem;">
+      <div class="main-card card text-center" style="width: 50rem;, height: 50rem;">
         <div class="card-header">
           <%= @post.user.first_name%>
           <%= @post.user.last_name%>
@@ -26,7 +26,7 @@
           <h4 class="card-title"><%=@post.title%></h4>
           <%if @post.image.attached?%>
           <p>
-            <%=image_tag @post.image, :size => "200x200" %>
+            <%image_tag @post.image, :size => "200x200" %>
           </p>
           <%end%>
           <p class="card-text"><%= @post.body.body%></p>
@@ -34,6 +34,7 @@
           <a><%= link_to 'Comment!',   new_post_comment_path(@post),class:"btn btn-primary"%></a>
 
         </div>
+          <button class = "test"> Bored!! </button>
       </div> 
     </div> 
 
@@ -52,7 +53,6 @@
               <p><%=comment.text%> </p>
               <% comment.replies.each do |reply| %>
               <%# if reply.parent_id == comment.id %>
-              <%# byebug %>
               <p>
                 <a><%=reply.text%></a> -by
                 <a><%=reply.user.email%></a>
@@ -96,3 +96,43 @@
               </div>
               <%end%>
             </div>
+
+
+
+
+
+<script >
+
+$(".card-body").on({
+  mouseenter: function(){
+    $(this).css("background-color", "lightgreen");
+  },
+  mouseleave: function(){
+    $(this).css("background-color", "lightblue");
+  },
+  click: function(){
+    $(this).css("background-color", "yellow");
+  }
+});
+
+
+$(".test").click(function(){
+  $('.trix-content').hide();
+  $.get("/posts/get_photo", function(data, status){
+    url = data['data'];
+    var image = new Image();
+    var r= $('<button class = "test1" >Click me</button>');;
+    image.src = url;
+    $('.card').first().append(image);
+    $('.card').first().append(r);
+  });
+  $(this).remove();
+}); 
+
+  // $('.main-card').children().last().click(function(){
+  //   debugger
+  //   // $('.trix-content').show();
+  //   // $('.card').first().remove(image);
+  // });
+
+</script>

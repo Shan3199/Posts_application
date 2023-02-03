@@ -1,5 +1,4 @@
 <br><br>
-
 <div class="d-flex justify-content-center">
 	<br>
 		
@@ -12,7 +11,7 @@
 	</div>	
 
 
-	<%if current_user.subscriptions.present? && current_user.user_subscriptions.select{|x| Date.parse(x.created_at.to_s) < Date.today + 10.days }.last.payment_status.eql?("captured")%>
+	<%if true #current_user.subscriptions.present? && current_user.user_subscriptions.select{|x| Date.parse(x.created_at.to_s) < Date.today + 10.days }.last.payment_status.eql?("captured")%>
 		<%=render partial: "postshow"%>
 	<%else%>
 	  <strong>Choose Plan:</strong>

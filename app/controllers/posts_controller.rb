@@ -1,19 +1,15 @@
 class PostsController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  before_action :set_user 
+  skip_before_action :verify_authenticity_token, except: [:get_photo]
+  before_action :set_user, except: [:get_photo]
   before_action :find_post, only: [:show, :edit, :update]
 
   def index
-    #@posts = Post.not_current_user(current_user)
-    #@posts = Post.not_current_user(current_user).paginate(page: params[:page], per_page: 5)
     @posts = Post.where.not(user_id:current_user).paginate(page: params[:page], per_page: 5)
   end
 
   def show
     @likes = @post.likes.all
-    @comment = @post.comments.parent_comment
-    # @post = Post.find(params[:post_id])
-    # @comments = @post.comments.all    
+    @comment = @post.comments.parent_comment    
   end
 
   def new
@@ -99,6 +95,10 @@ class PostsController < ApplicationController
 
   end
 
+  def get_photo
+    user_photo =  Rails.application.routes.url_helpers.url_for(Entertainment.order("RANDOM()").first.photo)
+    render json: {data: user_photo}
+  end
 
   private
 

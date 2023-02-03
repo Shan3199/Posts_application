@@ -1,50 +1,90 @@
 <div class="container mb-5 mt-5">
 
+
 <div class="d-flex justify-content-center">
 	<ul>
 		<% @posts.each do |post| %>
 		<br>
-		<div class="card text-black bg-warning mb-1" style="max-width: rem;">
-			<div class="card-header"><%= image_tag(post.user.avatar,:size => "60x60") if post.user.avatar.present?%>
-        <%= post.user.first_name%>
-        <%= post.user.last_name%>
-      </div>
-			<div class="card-body">
-				<h5  style="color:Tomato; class='card-title'"><%= post.title %></h5>
-				
-				<div class=' card-text textControl'><p><%= truncate(strip_tags(post.body.body.to_s), length: 50) %></div>
+		<!-- <div id = "slide-down"> -->
+			<div  class="card text-black bg-warning mb-1" style="max-width: rem;">
+				<div class="card-header"><%= image_tag(post.user.avatar,:size => "60x60") if post.user.avatar.present?%>
+	        <%= post.user.first_name%>
+	        <%= post.user.last_name%>
+	      </div>
+				<div class="card-body hide">
+					<h5  style="color:Tomato; class='card-title'"><%= post.title %></h5>
 					
-					<%= link_to '...Read more', post_path(post), class: "read-more-#{post.id} textControl" %></p>
+					<div class=' card-text textControl'><p><%= truncate(strip_tags(post.body.body.to_s), length: 50) %></div>
+						
+						<%= link_to '...Read more', post_path(post), class: "read-more-#{post.id} textControl" %></p>
 
 
-					<% if user_signed_in?  %>
-				
-						<% if post.author?(current_user)%>
+						<% if user_signed_in?  %>
+					
+							<% if post.author?(current_user)%>
 
-							<%= link_to 'Edit', edit_user_post_path(post.user, post), class:"btn btn-outline-success"%>
+								<%= link_to 'Edit', edit_user_post_path(post.user, post), class:"btn btn-outline-success"%>
 
-							<%= link_to 'Destroy', user_post_path(post.user, post),  method: :delete,
-							data: { confirm: "Are you sure?" },
-							class:"btn btn-outline-danger"%>
-                      
-							<%= link_to 'Post Info ', post_path(post), class:"btn btn-outline-success"%>
+								<%= link_to 'Destroy', user_post_path(post.user, post),  method: :delete,
+								data: { confirm: "Are you sure?" },
+								class:"btn btn-outline-danger"%>
+	                      
+								<%= link_to 'Post Info ', post_path(post), class:"btn btn-outline-success"%>
+							<%end%>
 						<%end%>
-					<%end%>
-					<% if !post.author?(current_user) %>
-					   
-						<%#= link_to 'Comment!', post_comments_path(post), class:"btn btn-outline-success"%>
-                      	<%= link_to 'Postinfo!',post_path(post), class:"btn btn-outline-info"%>
-   	                	<%#= link_to 'Subscribe', subscribe_path(plan_id: "plan_KgIIdBWQkFU56A"),method: :post, class:"btn btn-outline-success"%>
-						<%= render partial: 'post_likes', locals: {post: post} %>   
-					<%#else%>
-					   <%= link_to 'Pay ', pay_path, class:"btn btn-outline-success"%>          
-					<%end%>
-					</div>
-				</div>		
-				<% end %>
-				<br>
-			</ul>
+						<% if !post.author?(current_user) %>
+						   
+							<%#= link_to 'Comment!', post_comments_path(post), class:"btn btn-outline-success"%>
+	                      	<%= link_to 'Postinfo!',post_path(post), class:"btn btn-outline-info"%>
+	   	                	<%#= link_to 'Subscribe', subscribe_path(plan_id: "plan_KgIIdBWQkFU56A"),method: :post, class:"btn btn-outline-success"%>
+							<%= render partial: 'post_likes', locals: {post: post} %>   
+						<%#else%>
+						   <%= link_to 'Pay ', pay_path, class:"btn btn-outline-success"%>          
+						<%end%>
+						</div>
+					</div>		
+					<% end %>
+					<br>
+				</ul>
 		</div>
 </div>
 
 
+<script>
+
+$(".card-header").on({
+  mouseenter: function(){
+   	$('.card-body').css("background-color", "lightgreen");
+  },
+  mouseleave: function(){
+    $('.card-body').css("background-color", "yellow");
+  },
+  click: function(){
+  	$(this.parentElement.children[1]);
+    $('.card-body').css("background-color", "orange");
+  }
+});
+
+
+$(".card").on({
+	 click: function(){
+    $('.card').animate({
+    	opacity: '0.5',
+    	left: '0px'
+    });
+    $(this).animate({
+    	    left: '250px',
+    	    opacity: '100'
+    		});
+    $(this.children).show(1000);
+  }
+});
+
+
+// $('.d-flex').on({
+// 	mouseenter: function(){
+// 		// $('.card-body').hide(1000)
+// 	}
+// });
+
+</script>
