@@ -4,7 +4,12 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update]
 
   def index
-    @posts = Post.where.not(user_id:current_user).paginate(page: params[:page], per_page: 5)
+    if params[:search].present?
+      @posts = Post.where.not(user_id:current_user).where('lower(title) ILIKE ?', "%#{params[:search].downcase}%").paginate(page: params[:page], per_page: 5)
+      render json: {data: @posts}
+    else
+      @posts = Post.where.not(user_id:current_user).paginate(page: params[:page], per_page: 5)
+    end
   end
 
   def show
