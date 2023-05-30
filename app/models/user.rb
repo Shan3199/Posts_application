@@ -11,5 +11,8 @@ class User < ApplicationRecord
   has_many :user_subscriptions
   has_many :subscriptions,through: :user_subscriptions,dependent: :destroy
 
+  def valid_password(pass)
+    return BCrypt::Password.new(self.encrypted_password) == pass
+  end
 
 end

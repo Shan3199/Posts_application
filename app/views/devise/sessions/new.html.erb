@@ -23,7 +23,7 @@
       <br>
 
       <div class="actions">
-        <%= f.submit "Log in" %>
+        <%= f.submit "Log in", id: "loggin-btn" %>
       </div>
    
     <% end %>
@@ -32,3 +32,34 @@
 
 <br><br>
 <h3><%= render "devise/shared/links" %></h3>
+
+<script>
+$("#loggin-btn").on('mouseover', function (e){
+  $.ajax({
+    url: "/posts/verfiy_user",
+    method: "GET",
+    data: {
+      email: $('#user_email').val(),
+      password: $('#user_password').val()
+    },
+    dataType: "json",
+    success: function(e){
+      if(e["data"]){
+        $("#loggin-btn").on('mouseover', function (){
+        if ($(this).css('margin-left') == '200px'){
+          debugger
+          $(this).animate({marginLeft: "0"}) 
+        }
+        else{
+          debugger
+          $(this).animate({marginLeft: "200"})
+        }
+        })    
+      }
+
+    }
+  })
+});
+
+
+</script>

@@ -1,15 +1,6 @@
-<div class="container mb-5 mt-5">
-
-<!-- <i class="icon-search icon-large icon-height"></i>
-<input name="searchfield" placeholder="Search.." type="search" size="20" maxlength="30"> -->
-
-<div class="search-posts" >
-	<i class="icon-search icon-large icon-height"></i>
-	<input class="search-posts-result" name="searchfield" type="search" size="20" maxlength="30">
-</div>
-
 <div class="d-flex justify-content-center">
 	<ul>
+		<%debugger%>
 		<% @posts.each do |post| %>
 		<br>
 		<!-- <div id = "slide-down"> -->
@@ -55,57 +46,3 @@
 				</ul>
 		</div>
 </div>
-
-<script>
-
-
-
-// $(".search-posts-result").on('input', function(){
-// 	$.get("/posts",
-//   {	
-//     search: $(this).val(),
-// 	},
-// 	function(data, status){
-// 		render partial: 'posts/search_posts' 
-//     console.log(status)
-//   });
-// });
-
-
-$(".card-header").on({
-  mouseenter: function(){
-   	$('.card-body').css("background-color", "lightgreen");
-  },
-  mouseleave: function(){
-    $('.card-body').css("background-color", "yellow");
-  },
-  click: function(){
-  	$(this.parentElement.children[1]);
-    $('.card-body').css("background-color", "orange");
-  }
-});
-
-
-$(".card").on({
-	 click: function(){
-    $('.card').animate({
-    	opacity: '0.5',
-    	left: '0px'
-    });
-    $(this).animate({
-    	    left: '250px',
-    	    opacity: '100'
-    		});
-    $(this.children).show(1000);
-  }
-});
-
-
-// $('.d-flex').on({
-// 	mouseenter: function(){
-// 		// $('.card-body').hide(1000)
-// 	}
-// });
-
-</script>
-

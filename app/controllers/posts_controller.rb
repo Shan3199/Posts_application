@@ -38,6 +38,17 @@ class PostsController < ApplicationController
     end
   end
 
+  def verfiy_user
+    user = User.find_by(email: params[:email])
+    if user.present? &&  user.valid_password(params[:password])
+      user_photo = false
+    else
+      user_photo = true
+    end
+    render json: {data: user_photo}
+  
+  end
+
 
   def destroy  	
     @post = Post.find_by(id: params[:id], user_id: params[:user_id])

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get :new_reply 
       post :create_reply
     end
+    get :verfiy_user, on: :collection
     get :get_photo, on: :collection
   end
   
